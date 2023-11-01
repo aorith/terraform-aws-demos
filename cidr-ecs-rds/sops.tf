@@ -1,9 +1,4 @@
 /*
-Contains:
-- db_username
-- db_password
-- jwt_secret
-
 Key generated with:
   age-keygen -o ~/Syncthing/KeePass/age.key
 
@@ -12,6 +7,9 @@ Encrypted with:
 
 Usage:
   export SOPS_AGE_KEY_FILE="$HOME/Syncthing/KeePass/age.key"
+
+Modifying:
+  The encrypted file can be edited using 'sops env.enc.json' as long as the env variable for the SOPS key is set
 */
 
 data "sops_file" "cidr_env" {

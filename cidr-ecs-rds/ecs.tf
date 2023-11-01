@@ -53,7 +53,9 @@ resource "aws_ecs_task_definition" "cidr" {
         { "name" : "DB_HOST", "value" : "${aws_db_instance.default.address}" },
         { "name" : "DB_PORT", "value" : tostring(local.db_port) },
         { "name" : "DB_NAME", "value" : "${local.db_name}" },
-        { "name" : "JWT_SECRET", "value" : data.sops_file.cidr_env.data.jwt_secret }
+        { "name" : "JWT_SECRET", "value" : data.sops_file.cidr_env.data.jwt_secret },
+        { "name" : "DEFAULT_ADMIN_USER", "value" : data.sops_file.cidr_env.data.default_admin_user },
+        { "name" : "DEFAULT_ADMIN_USER_PASSWORD", "value" : data.sops_file.cidr_env.data.default_admin_user_password }
       ],
     }
   ])
