@@ -47,6 +47,16 @@ resource "aws_ecs_task_definition" "cidr" {
       ],
       "cpu" : 512,
       "memory" : 1024,
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group" : "true",
+          "awslogs-group" : local.awslogs_group_name,
+          "awslogs-region" : local.region,
+          "awslogs-stream-prefix" : local.name,
+          "mode" : "non-blocking"
+        }
+      },
       "environment" : [
         { "name" : "DB_USERNAME", "value" : data.sops_file.cidr_env.data.db_username },
         { "name" : "DB_PASSWORD", "value" : data.sops_file.cidr_env.data.db_password },
@@ -66,7 +76,7 @@ resource "aws_ecs_task_definition" "cidr" {
   memory                   = 1024
 
   # ARN of a role that the ECS container agent / docker can assume
-  #execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn = aws_iam_role.ecs.arn
 
   tags = local.default_tags
 }

@@ -13,11 +13,12 @@ locals {
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
   private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 3)]
 
-  container_name  = "cidr-listings"
-  container_image = "ghcr.io/aorith/cidr-listings:latest"
-  container_port  = 8000
-  db_name         = "cidr"
-  db_port         = 5432
+  container_name     = "cidr-listings"
+  container_image    = "ghcr.io/aorith/cidr-listings:latest"
+  awslogs_group_name = "cidr-logs"
+  container_port     = 8000
+  db_name            = "cidr"
+  db_port            = 5432
 
   default_tags = {
     Terraform      = "true"
