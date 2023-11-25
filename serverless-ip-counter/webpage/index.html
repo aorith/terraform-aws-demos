@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Address Counter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      .message {
+        font-size: 24px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message" id="message"></div>
+
+    <script>
+      window.onload = function () {
+        let URL = "<LAMBDA_URL>";
+
+        fetch(URL)
+          .then((response) => response.json())
+          .then((data) => {
+            const address = data.address;
+            const count = data.count;
+            let message = "";
+
+            if (count === 1) {
+              message = `Welcome ${address}! It seems like it's your first time visiting this page!`;
+            } else {
+              message = `Welcome back ${address}! You have visited this page ${count} times.`;
+            }
+
+            document.getElementById("message").innerText = message;
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error);
+            document.getElementById("message").innerText =
+              "Error loading data.";
+          });
+      };
+    </script>
+  </body>
+</html>
