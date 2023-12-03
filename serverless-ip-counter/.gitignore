@@ -5,18 +5,12 @@
 terraform.tfstate
 terraform.tfstate.*
 
-# Ignore crash log files
+# Crash log files
 crash.log
 
-# Ignore any .tfvars files that may contain sensitive data
+# Most .tfvars files contain sensitive data
 *.tfvars
 *.tfvars.json
-
-# Ignore override files as they are usually used for local development
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
 
 # Ignore CLI configuration files
 .terraformrc
